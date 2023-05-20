@@ -32,7 +32,7 @@ class PlateManager:
         Returns:
             list: A list of Plate objects with a diameter greater than the specified value.
         """
-        return [plate for plate in self.plates if plate.diameter > diameter]
+        return list(filter(lambda plate: plate.diameter > diameter, self.plates))
 
     def find_all_plates_made_from_glass(self):
         """
@@ -41,7 +41,7 @@ class PlateManager:
         Returns:
             list: A list of Plate objects made from glass.
         """
-        return [plate for plate in self.plates if plate.material == "glass"]
+        return list(filter(lambda plate: plate.material == "glass", self.plates))
 
     @staticmethod
     def main():
