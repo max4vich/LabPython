@@ -5,19 +5,49 @@ from models.soup_plate import SoupPlate
 
 
 class PlateManager:
+    """
+    A class used to manage a collection of Plate objects.
+
+    Attributes:
+        plates (list): A list of Plate objects.
+    """
     plates = []
 
     def add_plate(self, plate):
+        """
+        Adds a Plate object to the plates list.
+
+        Args:
+            plate (Plate): The Plate object to be added.
+        """
         self.plates.append(plate)
 
     def find_all_plates_with_diameter_greater_than(self, diameter):
+        """
+        Finds all Plate objects in the plates list with a diameter greater than the specified value.
+
+        Args:
+            diameter (float): The diameter value to compare against.
+
+        Returns:
+            list: A list of Plate objects with a diameter greater than the specified value.
+        """
         return [plate for plate in self.plates if plate.diameter > diameter]
 
     def find_all_plates_made_from_glass(self):
+        """
+        Finds all Plate objects in the plates list made from glass.
+
+        Returns:
+            list: A list of Plate objects made from glass.
+        """
         return [plate for plate in self.plates if plate.material == "glass"]
 
     @staticmethod
     def main():
+        """
+        The main method of the PlateManager class. Demonstrates the usage of the class and its methods.
+        """
         manager = PlateManager()
 
         manager.add_plate(SaladPlate(8, "porcelain", "white", True, False, "round", True))
