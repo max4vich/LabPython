@@ -1,3 +1,6 @@
+"""
+This module contains the PlateManager class which is used to manage a collection of Plate objects.
+"""
 from models.dessert_plate import DessertPlate
 from models.dinner_plate import DinnerPlate
 from models.salad_plate import SaladPlate
@@ -46,7 +49,8 @@ class PlateManager:
     @staticmethod
     def main():
         """
-        The main method of the PlateManager class. Demonstrates the usage of the class and its methods.
+        The main method of the PlateManager class.
+        Demonstrates the usage of the class and its methods.
         """
         manager = PlateManager()
 

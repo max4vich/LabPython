@@ -1,3 +1,6 @@
+"""
+This module contains the SaladPlate class which is used to represent a Salad Plate.
+"""
 import math
 from abc import ABC
 
@@ -13,7 +16,7 @@ class SaladPlate(Plate, ABC):
         dishwasher_safe (bool): Indicates whether the plate is dishwasher safe or not.
 
     Methods:
-        getMaxFoodWeight(): Returns the maximum weight of food that the plate can hold.
+        get_max_food_weight(): Returns the maximum weight of food that the plate can hold.
     """
     def __init__(self, diameter=None,
                  material=None,
@@ -38,7 +41,7 @@ class SaladPlate(Plate, ABC):
         self.shape = shape
         self.dishwasher_safe = dishwasher_safe
 
-    def getMaxFoodWeight(self):
+    def get_max_food_weight(self):
         """
         Returns the maximum weight of food that the plate can hold.
 
@@ -62,6 +65,3 @@ class SaladPlate(Plate, ABC):
                f"has_food: {self.has_food}\n" \
                f"depth: {self.shape}\n" \
                f"soup_type: {self.dishwasher_safe}\n"
-
-
-salad_plate = SaladPlate(8, "porcelain", "white", True, False, "round", True)

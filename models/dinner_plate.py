@@ -1,3 +1,6 @@
+"""
+This module contains the DinnerPlate class which is used to represent a Dinner Plate.
+"""
 from abc import ABC
 
 from models.plate import Plate
@@ -8,16 +11,16 @@ class DinnerPlate(Plate, ABC):
     A class used to represent a Dinner Plate.
 
     Methods:
-        getMaxFoodWeight(): An abstract method to be implemented by concrete dinner plate classes.
+        get_max_food_weight(): An abstract method to
+        be implemented by concrete dinner plate classes.
     """
-    def getMaxFoodWeight(self):
+    def get_max_food_weight(self):
         """
         Abstract method to be implemented by concrete dinner plate classes.
 
         Returns:
             float: The maximum weight of food that the plate can hold.
         """
-        pass
 
     def __str__(self):
         """
@@ -31,4 +34,3 @@ class DinnerPlate(Plate, ABC):
                f"Color: {self.color}\n" \
                f"is_clean: {self.is_clean}\n" \
                f"has_food: {self.has_food}\n"
-

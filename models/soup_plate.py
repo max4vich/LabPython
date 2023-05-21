@@ -1,3 +1,6 @@
+"""
+This module contains the SoupPlate class which is used to represent a Soup Plate.
+"""
 import math
 from abc import ABC
 
@@ -13,7 +16,7 @@ class SoupPlate(Plate, ABC):
         soup_type (str): The type of soup the plate is intended for.
 
     Methods:
-        getMaxFoodWeight(): Returns the maximum weight of food that the plate can hold.
+        get_max_food_weight(): Returns the maximum weight of food that the plate can hold.
     """
     def __init__(self, diameter=None,
                  material=None,
@@ -38,15 +41,15 @@ class SoupPlate(Plate, ABC):
         self.depth = depth
         self.soup_type = soup_type
 
-    def getMaxFoodWeight(self):
+    def get_max_food_weight(self):
         """
         Returns the maximum weight of food that the plate can hold.
 
         Returns:
             float: The maximum weight of food that the plate can hold.
         """
-        radius = self.diameter / 2;
-        return 0.5 * math.pi * radius * radius * self.depth;
+        radius = self.diameter / 2
+        return 0.5 * math.pi * radius * radius * self.depth
 
     def __str__(self):
         """
@@ -55,13 +58,13 @@ class SoupPlate(Plate, ABC):
         Returns:
             str: A string representation of the SoupPlate object.
         """
-        return f"Diameter: {self.diameter}\n" \
-               f"Material: {self.material}\n" \
-               f"Color: {self.color}\n" \
-               f"is_clean: {self.is_clean}\n" \
-               f"has_food: {self.has_food}\n" \
-               f"depth: {self.depth}\n" \
-               f"soup_type: {self.soup_type}\n"
+        return f"Diameter: {self.diameter} \n"\
+               f"Material: {self.material} \n"\
+               f"Color: {self.color} \n"\
+               f"is_clean: {self.is_clean} \n"\
+               f"has_food: {self.has_food} \n"\
+               f"depth: {self.depth} \n"\
+               f"soup_type: {self.soup_type} \n"
 
 
 soup_plate = SoupPlate(10, "ceramic", "white", True, False, 5, "Tomato Soup")
