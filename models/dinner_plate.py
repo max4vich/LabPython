@@ -14,6 +14,23 @@ class DinnerPlate(Plate, ABC):
         get_max_food_weight(): An abstract method to
         be implemented by concrete dinner plate classes.
     """
+
+    # pylint: disable = too-many-arguments
+    def __init__(self, diameter, material, color, is_clean, has_food):
+        """
+        Initializes a new SaladPlate object.
+
+        Args:
+            diameter (float or None): The diameter of the plate.
+            material (str or None): The material used to make the plate.
+            color (str or None): The color of the plate.
+            is_clean (bool or None): Indicates whether the plate is clean or not.
+            has_food (bool or None): Indicates whether the plate has food or not.
+            typical_colors_set (set): Set of colors.
+        """
+        super().__init__(diameter, material, color, is_clean, has_food)
+        self.typical_colors_set = {"red", "black"}
+
     def get_max_food_weight(self):
         """
         Abstract method to be implemented by concrete dinner plate classes.

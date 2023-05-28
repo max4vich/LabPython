@@ -2,12 +2,10 @@
 This module contains the SaladPlate class which is used to represent a Salad Plate.
 """
 import math
-from abc import ABC
-
 from models.plate import Plate
 
 
-class SaladPlate(Plate, ABC):
+class SaladPlate(Plate):
     """
     A class used to represent a Salad Plate.
 
@@ -18,6 +16,7 @@ class SaladPlate(Plate, ABC):
     Methods:
         get_max_food_weight(): Returns the maximum weight of food that the plate can hold.
     """
+    # pylint: disable = too-many-arguments
     def __init__(self, diameter=None,
                  material=None,
                  color=None,
@@ -36,10 +35,12 @@ class SaladPlate(Plate, ABC):
             has_food (bool or None): Indicates whether the plate has food or not.
             shape (str or None): The shape of the salad plate.
             dishwasher_safe (bool or None): Indicates whether the plate is dishwasher safe or not.
+            typical_colors_set (set): Set of colors.
         """
         super().__init__(diameter, material, color, is_clean, has_food)
         self.shape = shape
         self.dishwasher_safe = dishwasher_safe
+        self.typical_colors_set = {"grey", "green"}
 
     def get_max_food_weight(self):
         """

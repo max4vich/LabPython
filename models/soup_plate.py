@@ -1,3 +1,4 @@
+# pylint: disable = duplicate-code
 """
 This module contains the SoupPlate class which is used to represent a Soup Plate.
 """
@@ -18,6 +19,8 @@ class SoupPlate(Plate, ABC):
     Methods:
         get_max_food_weight(): Returns the maximum weight of food that the plate can hold.
     """
+
+    # pylint: disable = too-many-arguments
     def __init__(self, diameter=None,
                  material=None,
                  color=None,
@@ -36,10 +39,12 @@ class SoupPlate(Plate, ABC):
             has_food (bool or None): Indicates whether the plate has food or not.
             depth (float or None): The depth of the soup plate.
             soup_type (str or None): The type of soup the plate is intended for.
+            typical_colors_set (set): Set of colors.
         """
         super().__init__(diameter, material, color, is_clean, has_food)
         self.depth = depth
         self.soup_type = soup_type
+        self.typical_colors_set = {"yellow", "white"}
 
     def get_max_food_weight(self):
         """
@@ -58,6 +63,7 @@ class SoupPlate(Plate, ABC):
         Returns:
             str: A string representation of the SoupPlate object.
         """
+        # pylint: disable = duplicate-code
         return f"Diameter: {self.diameter} \n"\
                f"Material: {self.material} \n"\
                f"Color: {self.color} \n"\
@@ -65,6 +71,3 @@ class SoupPlate(Plate, ABC):
                f"has_food: {self.has_food} \n"\
                f"depth: {self.depth} \n"\
                f"soup_type: {self.soup_type} \n"
-
-
-soup_plate = SoupPlate(10, "ceramic", "white", True, False, 5, "Tomato Soup")
