@@ -5,6 +5,8 @@ from models.dessert_plate import DessertPlate
 from models.dinner_plate import DinnerPlate
 from models.salad_plate import SaladPlate
 from models.soup_plate import SoupPlate
+from exceptions.exceptions import MaterialError
+from exceptions.logging import logged
 
 
 class PlateManager:
@@ -16,6 +18,7 @@ class PlateManager:
     """
     plates = []
 
+    @staticmethod
     # pylint: disable = no-self-argument
     def print_arg_count(func):
         """
@@ -27,6 +30,7 @@ class PlateManager:
         Returns:
             The decorated function.
         """
+
         def wrapper(*args, **kwargs):
             """
             The wrapper function that counts the number of
@@ -48,6 +52,7 @@ class PlateManager:
 
         return wrapper
 
+    @staticmethod
     def limit_calls(max_calls):
         """
         A decorator factory that creates a decorator
@@ -59,6 +64,7 @@ class PlateManager:
         Returns:
             The decorator that limits the number of times a function can be called.
         """
+
         def decorator(func):
             """
             The decorator that limits the number of times a function can be called.
@@ -98,7 +104,7 @@ class PlateManager:
 
         return decorator
 
-    #@limit_calls(3)
+    # @limit_calls(3)
     @print_arg_count
     def add_plate(self, plate):
         """
@@ -126,15 +132,19 @@ class PlateManager:
 
     # pylint: disable = too-many-function-args
     @limit_calls(3)
+    @logged(MaterialError, mode="file")
     @print_arg_count
-    def find_all_plates_made_from_glass(self):
+    def find_all_plates_made_from_glass(self, material):
         """
         Finds all Plate objects in the plates list made from glass.
 
         Returns:
             list: A list of Plate objects made from glass.
         """
-        return list(filter(lambda plate: plate.material == "glass", self.plates))
+        if material == "glass":
+            return list(filter(lambda plate: plate.material == material, self.plates))
+        else:
+            raise MaterialError(material)
 
     def __len__(self):
         """
@@ -254,7 +264,7 @@ def main():
     """
     manager = PlateManager()
 
-    manager.add_plate(SaladPlate(8, "porcelain", "white", True, False, "round", True))
+    manager.add_plate(SaladPlate(8, "porcelain", 123, True, False, "round", True))
     manager.add_plate(SaladPlate(9, "glass", "black", True, True, "oval", False))
 
     manager.add_plate(SoupPlate(12, "glass", "white", True, False, 5, "Tomato Soup"))
@@ -275,7 +285,7 @@ def main():
         print(str(plate))
 
     print("\nDef: find_all_plates_made_from_glass\n")
-    filtered_plates = manager.find_all_plates_made_from_glass()
+    filtered_plates = manager.find_all_plates_made_from_glass("glass")
     for plate in filtered_plates:
         print(str(plate))
     # pylint: disable = unnecessary-dunder-call
@@ -301,6 +311,10 @@ def main():
 
     print("5. Методи all() та any()")
     print(manager.check_all_any_of_plates(lambda plate: plate.diameter == 7))
+
+    filtered_plates = manager.find_all_plates_made_from_glass("glss")
+    for plate in filtered_plates:
+        print(str(plate))
 
 
 if __name__ == "__main__":

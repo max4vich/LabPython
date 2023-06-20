@@ -3,20 +3,24 @@ Plate - parent class
 """
 from abc import ABC, abstractmethod
 
+from exceptions.exceptions import ColorError
+from exceptions.logging import logged
+
 
 # pylint: disable = too-few-public-methods
 class Plate(ABC):
     """
-     A class used to represent a Plate.
+    A class used to represent a Plate.
 
-     Attributes:
-     diameter (float or None): The diameter of the plate.
-     material (str or None): The material used to make the plate.
-     color (str or None): The color of the plate.
-     is_clean (bool or None): Indicates whether the plate is clean or not.
-     has_food (bool or None): Indicates whether the plate has food or not.
-     """
+    Attributes:
+    diameter (float or None): The diameter of the plate.
+    material (str or None): The material used to make the plate.
+    color (str or None): The color of the plate.
+    is_clean (bool or None): Indicates whether the plate is clean or not.
+    has_food (bool or None): Indicates whether the plate has food or not.
+    """
     # pylint: disable = too-many-arguments
+    @logged(ColorError, mode="file")
     def __init__(self, diameter=None,
                  material=None,
                  color=None,
@@ -35,7 +39,10 @@ class Plate(ABC):
         """
         self.diameter = diameter
         self.material = material
-        self.color = color
+        if isinstance(color, str):
+            self.color = color
+        else:
+            raise ColorError(color)
         self.is_clean = is_clean
         self.has_food = has_food
         self.typical_colors_set = set()
